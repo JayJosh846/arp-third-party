@@ -1,0 +1,340 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id             Int        @id @default(autoincrement())
+  email          String     @unique
+  firstname      String
+  lastname       String
+  password       String
+  mobile         String     @unique
+  emailVerified  Boolean    @default(false)
+  mobileVerified Boolean    @default(false)
+  enabled2FA     Boolean    @default(false)
+  role           Role       @default(PASSENGER)
+  status         Userstatus @default(ACTIVE)
+  walletBalance  String?     
+  numOfFlights   Int?
+  totalFee       Int?       @default(0)
+  numOfRefunds   Int?
+  totalRefunds   Int?       @default(0)
+  totalDeposits  Int?       @default(0)
+  totalWithdraws Int?       @default(0)      
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  AuthCode       AuthCode[]
+  addr           String?
+  pvtKey         String?
+  redisKey       String?
+  booked         Booked[]
+  transactions   Transactions[]
+  Wallettrans    Wallettransactions[]
+  userBankList   Usersbanklist[]
+  userverif      Userverification[]
+  passreset      Passwordreset[]
+  passengercheck Passengercheckin[]
+  passengerccancel Passengercancel[]
+
+  @@unique(fields: [email, mobile], name: "emailMobile")
+  // @@unique(fields: [firstname, lastname, email])
+
+}
+
+model Airline {
+  id             Int        @id @default(autoincrement())
+  email          String     @unique
+  airlineName    String     @unique
+  password       String
+  mobile         String     @unique
+  emailVerified  Boolean    @default(false)
+  mobileVerified Boolean    @default(false)
+  enabled2FA     Boolean    @default(false)
+  role           Role       @default(AIRLINE)
+  status         Airlinestatus @default(ACTIVE)
+  walletBalance  String?     
+  numOfFlights   Int?        
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  addr           String?    
+  apiKey         String?    @unique
+  flight        Flight[]
+
+
+
+  @@unique(fields: [email, mobile], name: "emailMobile")
+  @@unique(fields: [airlineName, addr])
+
+}
+
+
+model Flight {
+  id            Int      @id @default(autoincrement())
+  airline       Airline  @relation(fields: [airlineId], references: [id])
+  airlineId     Int 
+  airlineName   String
+  airlineAddres String
+  flightCode    String   @unique
+  departureCity String
+  departureDate String
+  departureTime String
+  departureInfo String?
+  arrivalCity   String
+  arrivalDate   String
+  arrivalTime   String
+  arrivalInfo   String?
+  airfare       String
+  pass          Int?     @default(0)
+  totalFee      Int?     @default(0)
+  cancelled     Int?     @default(0)
+  checkedIn     Int?     @default(0)
+  flightComplete Boolean? @default(false)
+  class         CLASS    @default(ECONOMY)
+  apstatus      String?  @default("0")
+  status        Status   @default(PENDING)
+  flightEscrow  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+}
+
+model Booked {
+  id            Int      @id @default(autoincrement())
+  airlineId     Int
+  airlineName   String  
+  airlineAddres String 
+  user          User     @relation(fields: [email], references: [email])
+  userId        Int      
+  email         String   
+  userFirstName String
+  userLastName  String
+  numOfAdults   Int
+  numOfChildren Int      @default(0)
+  numOfInfants  Int      @default(0)
+  flightCode    String   
+  departureCity String
+  departureDate String
+  departureTime String
+  departureInfo String?
+  arrivalCity   String
+  arrivalDate   String
+  arrivalTime   String
+  arrivalInfo   String?
+  amount        String
+  pass          Int?     @default(0)
+  totalFee      Int?     @default(0)
+  cancelled     Boolean?  @default(false)
+  checkedIn     Boolean?  @default(false)
+  class         CLASS    @default(ECONOMY)
+  apstatus      String   @default("0")
+  status        Status   @default(PENDING)
+  ticketId    String   @unique  
+  flightEscrow  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+}
+
+model AuthCode {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userEmail], references: [email])
+  userEmail String   @unique
+  OTP       Int      @unique
+  category  Category
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transactions {
+  id            Int      @id @default(autoincrement())
+  from          String
+  user          User     @relation(fields: [email], references: [email])
+  userFirstName String
+  userLastName  String
+  email         String    
+  amount        Int 
+  description   String
+  trxType       String     
+  status        String   @default("pending")
+  reference     String?   @unique
+  channel       String   @default("null")
+  currency      String   @default("null")
+  paid_at       String   @default("null")
+  created_at    String   @default("null")
+}
+
+model Wallettransactions {
+  id            Int      @id @default(autoincrement())
+  user          User         @relation(fields: [userId], references: [id])
+  userId        Int       
+  from          String?
+  fromAddr      String?
+  receiverName  String?
+  receiverAddr  String?
+  amount        Int
+  description   String
+  trxRef        String?   @unique
+  trxType       String
+  status        String   @default("pending")
+  createdAt     DateTime      @default(now())
+
+}
+
+model Usersbanklist {
+  id             Int           @id @default(autoincrement())
+  user           User         @relation(fields: [userId], references: [id])
+  userId         Int       
+  acctResCountry Country      @default(NIGERIA)
+  acctName       String?
+  acctBank       String?    
+  acctNumber     String?      @unique 
+  acctType       AccountType  @default(SAVINGS_ACCOUNT)    
+  acctSwiftCode  String? 
+
+}
+
+model Userverification {
+  id             Int           @id @default(autoincrement())
+  user           User          @relation(fields: [userId], references: [id])
+  userId         Int           @unique 
+  uniqueString   String
+  createdAt      Int      
+  expiresAt      Int      
+
+}
+
+model Passwordreset {
+  id             Int           @id @default(autoincrement())
+  user           User          @relation(fields: [userId], references: [id])
+  userId         Int           @unique 
+  resetString   String         @unique
+  createdAt      Int      
+  expiresAt      Int      
+
+}
+
+model Passengercheckin {
+  id             Int           @id @default(autoincrement())
+  user           User          @relation(fields: [userId], references: [id])
+  userId         Int           
+  status         String
+  username       String
+  airlineName    String
+  flightCode     String
+  departureCity  String
+  departureDate  String
+  arrivalCity    String
+  arrivalDate    String
+  ticketId       String
+  createdAt      DateTime      @default(now())           
+}
+
+model Passengercancel {
+  id             Int           @id @default(autoincrement())
+  user           User          @relation(fields: [userId], references: [id])
+  userId         Int           
+  status         String
+  username       String
+  airlineName    String
+  airlineId      Int?
+  flightCode     String        
+  departureCity  String
+  departureDate  String
+  arrivalCity    String
+  arrivalDate    String
+  amount         String?
+  amountRefunded String?
+  class          CLASS?       @default(ECONOMY)
+  ticketId       String       @unique
+  createdAt      DateTime      @default(now())           
+}
+
+model Airlinerefunds {
+  id             Int           @id @default(autoincrement())
+  airlineId      Int   
+  airlineName    String         
+  num            Int
+  scheduled      Calendrical
+  parcentage     Int 
+}
+
+model Fakedata {
+  id             Int           @id @default(autoincrement())
+  firstname      String
+  lastname       String
+  email          String     
+  mobile         String     
+  password       String
+}
+
+
+enum Calendrical {
+  HOURS
+  DAYS
+  WEEKS
+  MONTHS
+}
+
+enum Role {
+  PASSENGER
+  AIRLINE
+  ADMIN
+}
+
+enum Userstatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum Airlinestatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum Category {
+  VERIFICATION
+  FA
+}
+
+enum Status {
+  PENDING
+  DELAYED
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum CLASS {
+  ECONOMY
+  BUSINESS
+  FIRST_CLASS
+  PREMIUM_ECONOMY
+}
+
+enum AccountType {
+  SAVINGS_ACCOUNT
+  CURRENT_ACCOUNT
+}
+
+enum Country {
+  NIGERIA
+  GHANA
+  USA
+  BRAZIL
+}
+
+

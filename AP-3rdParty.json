@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "badc78a5-4b4b-4eba-ab73-c29b497a3677",
+		"name": "AP-3rdParty",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1933305"
+	},
+	"item": [
+		{
+			"name": "Create API Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "$2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4010/api/v1/create-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"api",
+						"v1",
+						"create-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Initialise Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "$2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4010/api/v1/initialize-payment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"api",
+						"v1",
+						"initialize-payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Canceled Flight",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "$2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"flightCode\": \"ARK U645\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4010/api/v1/cancelled-flights/Arik Air",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"api",
+						"v1",
+						"cancelled-flights",
+						"Arik Air"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Flights",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "$2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4010/api/v1/flights/Arik Air",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"api",
+						"v1",
+						"flights",
+						"Arik Air"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Booked Flights",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "$2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4010/api/v1/booked-flights/Arik Air/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"api",
+						"v1",
+						"booked-flights",
+						"Arik Air",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Booked Flights by Flight Code",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "$2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4010/api/v1/booked-flights/Arik Air/ARK JM55",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"api",
+						"v1",
+						"booked-flights",
+						"Arik Air",
+						"ARK JM55"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Cancelled Flights",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "$2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4010/api/v1/cancelled-flights/Arik Air",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"api",
+						"v1",
+						"cancelled-flights",
+						"Arik Air"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cancelled Flights By Flight Code",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "$2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4010/api/v1/cancelled-flights/Arik Air/ARK JM55",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"api",
+						"v1",
+						"cancelled-flights",
+						"Arik Air",
+						"ARK JM55"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

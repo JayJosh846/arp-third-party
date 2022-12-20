@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "addr" DROP NOT NULL,
+ALTER COLUMN "pvtKey" DROP NOT NULL;

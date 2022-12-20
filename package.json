@@ -1,0 +1,60 @@
+{
+  "name": "aeropaye-passengers-service",
+  "version": "1.0.0",
+  "description": "aeropaye passengers microservices",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npx prisma generate"
+  },
+  "engines": {
+    "node": "^14.12.0"
+  },
+  "author": "Anu Apiti",
+  "license": "MIT",
+  "dependencies": {
+    "@escape.tech/graphql-armor": "^1.0.8",
+    "@prisma/client": "^3.14.0",
+    "@supercharge/strings": "^1.28.0",
+    "amqplib": "^0.8.0",
+    "aws-sdk": "^2.1167.0",
+    "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "canvas": "^2.9.1",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "ethers": "^5.6.9",
+    "express": "^4.17.3",
+    "fetch": "^1.1.0",
+    "googleapis": "^104.0.0",
+    "graphql": "^14.7.0",
+    "graphql2rest": "^0.6.4",
+    "https": "^1.0.0",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "nodemailer": "^6.7.5",
+    "nodemailer-express-handlebars": "^5.0.0",
+    "nodemailer-mailgun-transport": "^2.1.4",
+    "qrcode": "^1.5.0",
+    "redis": "^3.1.2",
+    "request": "^2.88.2",
+    "simple-sha256": "^1.1.0",
+    "swagger-ui-express": "^4.5.0",
+    "url": "^0.11.0",
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13",
+    "web3": "^1.7.5",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "prisma": "^3.14.0"
+  }
+}

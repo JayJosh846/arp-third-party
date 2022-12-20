@@ -1,0 +1,163 @@
+openapi: 3.0.0
+info:
+  title: Aeropaye API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://aeropaye-api.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /initialize-payment:
+    post:
+      tags:
+      - Misc
+      summary: Initialise Payment
+      operationId: InitialisePayment
+      parameters:
+      - name: api-key
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: $2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /cancelled-flights:
+    get:
+      tags:
+      - Misc
+      summary: Get Canceled Flight
+      operationId: GetCanceledFlight
+      parameters:
+      - name: api-key
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: $2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /flights:
+    get:
+      tags:
+      - Misc
+      summary: Get All Flights
+      operationId: GetAllFlights
+      parameters:
+      - name: api-key
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: $2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /booked-flights:
+    get:
+      tags:
+      - Misc
+      summary: Get All Booked Flights
+      operationId: GetAllBookedFlights
+      parameters:
+      - name: api-key
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: $2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /booked-flights/{flightCode}:
+    parameters:
+      - in: path
+        name: flightCode
+        schema:
+          type: string
+        required: true
+        description: The airline Flight Code
+    get:
+      tags:
+      - Misc
+      summary: Get Booked Flights by Flight Code
+      operationId: GetBookedFlightsbyFlightCode
+      parameters:
+      - name: api-key
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: $2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /cancelled-flights/{flightCode}:
+    parameters:
+      - in: path
+        name: flightCode
+        schema:
+          type: string
+        required: true
+        description: The airline Flight Code
+    get:
+      tags:
+      - Misc
+      summary: Get Cancelled Flights By Flight Code
+      operationId: GetCancelledFlightsByFlightCode
+      parameters:
+      - name: api-key
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: $2a$10$.1Efok0/oDbPx6ZYUkUaBOWa0wzyXEIAmSweVlRl/CX6aM7sAf6pq
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  # /create-token:
+  #   post:
+  #     tags:
+  #     - Auth
+  #     summary: Create API Token
+  #     operationId: CreateAPIToken
+  #     parameters: []
+  #     responses:
+  #       '200':
+  #         description: ''
+  #         headers: {}
+  #     deprecated: false
+  #     security: []
+security:
+- {}
+tags:
+- name: Misc
+  description: ''
+# - name: Auth
+#   description: ''

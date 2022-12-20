@@ -1,0 +1,39 @@
+<h1 class="title">Your Flight Itinerary</h1>
+<p class="text">Dear {{userFirstName}} {{userLastName}}<br/>
+Here is your Flight Itinerary with {{airlineName}} with flight code {{flightCode}}
+scheduled for {{departureDate}}.
+</p>
+<br/>
+<br/>
+<h1 class="title">Flight Itinerary:</h1>
+<ul>
+  <li>Full Name:      {{userFirstName}} {{userLastName}} </li>
+  <li>TicketlessID:   {{ticketId}}</li>
+  <li>Booked With:    {{airlineName}} ({{flightCode}}) </li>
+  <li>Departure City: {{departureCity}} </li>
+  <li>Arrival City:   {{arrivalCity}} </li>
+  <li>Departure Date: {{departureDate}} </li>
+  <li>Arrival Date:   {{arrivalDate}} </li>
+  <li>Departure Time: {{departureTime}} </li>
+  <li>Arrival Time:   {{arrivalTime}} </li>
+  <li>Flight Class:   {{flightClass}} </li>
+  <li>Status:         CONFIRMED </li>
+
+</ul>
+<br />
+
+<h1 class="title">Security Tips:</h1>
+<ul>
+  <li>Never give your password to anyone.</li>
+  <li>Never call any phone number for someone claiming to be Aeropaye Support.</li>
+  <li>Never send any money to anyone claiming to be a member of Aeropaye team.</li>
+  {{!-- <li>Enable Google Two Factor Authentication.</li> --}}
+  <li>Bookmark www.aeropaye.com and use only this domain.</li>
+</ul>
+
+<br/>
+<p>If you don't recognize this activity, please contact our customer support immediately at: <a href="https://www.aeropaye.com/contact">Aeropaye Support</a></p>
+<br/>
+<p class="text">Aeropaye Team<br/>
+This is an automated message, please do not reply.</p>
+

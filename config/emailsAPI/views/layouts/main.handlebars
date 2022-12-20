@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aeropaye Email template test</title>
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      display: flex;
+      justify-content: start;
+      align-items: flex-start;
+      overflow: scroll;
+      width: inherit;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      background-color: rgb(249, 250, 252, 1);
+      color: rgb(0, 0, 0);
+    }
+    .header > .header-title {
+      display: flex;
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: bolder;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: rgb(0, 0, 0);
+    }
+    .header > .header-logo {
+      width: 60px;
+      height: 60px;
+      margin-right: 10px;
+    }
+
+
+    .content {
+      min-height: 540px;
+      padding: 45px;
+      background-color: rgba(249, 250, 252, 1);
+    }
+    .content > .title {
+      font-size: 1.5em;
+      font-weight: bolder;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+    }
+    .content > .text {
+      font-size: 1.1em;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+    }
+    .content > .btn-link {
+      padding: 15px 30px;
+      background-color: rgba(63, 71, 204, 1);
+      color: white;
+      text-transform: none;
+      text-decoration: none;
+    }
+
+    .content > .btn-link:hover {
+      background-color: rgba(17, 18, 39, 0.65);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="https://i.ibb.co/b23CWM2/blue-icon.png" class="header-logo" />
+    <h1 class="header-title">Aeropaye</h1>
+  </div>
+  <div class="content">
+    {{{body}}}
+  </div>
+  <div class="footer" style="padding: 30px; border-top: 1px solid black; background-color: rgba(249, 250, 252, 1);">
+    <div style="text-align: center; margin-bottom: 15px;">
+      <div class="social-icons">
+        <a href="#linkdin">
+          <img src="https://wrapcbdc.com/footer_assets/socials/linkdin.png" width="24px" height="24px" />
+        </a>
+        <a href="#twitter">
+          <img src="https://wrapcbdc.com/footer_assets/socials/twitter.png" width="24px" height="24px" />
+        </a>
+        <a href="#linkdin">
+          <img src="https://wrapcbdc.com/footer_assets/socials/medium.png" width="24px" height="24px" />
+        </a>
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <h4 class="contact" style="font-size: 1rem;
+      color: rgba(203, 207, 221, 1);
+      margin: 0;">{{!-- Phone number --}}+234-1234-56-7890</h4><br/>
+    </div>
+    <div style="text-align: center; padding: 0 30px 0 30px;">
+      <span class="extra-info" style="font-size: .86rem; color: rgba(203, 207, 221, 1); display: inline-block;">Kindly note: Please be aware of phishing sites and always make sure you are visiting the official <a href="https://aeropaye.com/">aeropaye.com</a> website when entering sensitive data. You received this email because you are registered with <a href="https://aeropaye.com/">aeropaye.com</a></span>
+    </div>
+  </div>
+</body>
+</html>

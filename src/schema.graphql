@@ -1,0 +1,395 @@
+type Query {
+  info: String!
+  
+  allPassengers: [User!]!,
+
+  allPassengersIndex: Int,
+  
+  allAirlineAdmins: [User!]!,
+  
+  allAeropayeAdmins: [User!]!,
+  
+  getAUser: User,
+  
+  getAFlightById(id: ID!): Flight,
+  
+  verifyEmailToken(id: ID!): Boolean!
+  # getAvailableFlights(status: String!, airlineName: String): [Flight!]!
+  
+  getAvailableFlights: [Flight!]!
+
+  getAvailableFlightsIndex: Int
+
+  getAirlines: [Airlines!]!
+
+  getAirlineIndex: Int
+
+  getAllFlights: [Flight!]!
+
+  escrowBalance: Int
+
+  
+  balance: BalanceOf
+
+  userBankDetails: [Usersbanklist!]!
+
+  getBookedFlight: [Booked!]!
+
+  transactions: [Transactions!]!
+
+  transactionsAdmin: [Transactions!]!
+
+  userVerificationStatus: Boolean
+
+  fakeData: [User!]!
+
+  bookedFlightHistory: [Booked!]!
+
+}
+
+type Mutation {
+  signup(firstname: String!, lastname: String!, email: String!, password: String!, mobile: String!, role: ROLES): AuthPayload
+
+  login(email: String!, password: String!): AuthPayload
+
+  sendEmailOTP(email: String!): AuthCode
+  
+  sendTermiiTokenToMobile(msisdn: String!): AuthCodeMobile
+  
+  verifyMobileWithTermiiToken(msisdn: String!, pin: String!): AuthCodeMobile
+  
+  makePayment( amountDeposited: Int) : PaymentRes
+
+  mint: MintToken
+  
+  bookFlight(  
+  flightCode:    String!
+  departureCity: String!
+  arrivalCity:   String!
+  departureDate: String!
+  arrivalDate:   String!
+  departureTime: String!
+  arrivalTime:   String!
+  numOfAdults:   Int!
+  numOfChildren: Int
+  numOfInfants:  Int
+  amount:        String!
+  class:         CLASS!
+  # ticketId:    String
+  ) : Bookedpayload
+  # balance: BalanceOf
+  
+  userBankDetails (
+    residentCountry: Country
+    acctName:        String!
+    acctBank:        String!
+    acctNumber:      String!
+    acctType:        AccountType
+    acctSwiftCode:   String
+  ) : BankAccount
+
+  redeemFiat (
+    amount: String!
+    accountToWithdraw: String!
+  ): Withdrawal
+
+  transferToken (
+    recipientAddress: String!
+    amount: String!
+  ): Withdrawal
+
+  cancelBookings(
+    flightCode: String!
+  ): Withdrawal!
+
+  checkIn (
+    flightCode: String!
+  ): Message!
+
+  sendEmailVerification: Withdrawal!
+
+  verifyUser: Boolean!
+
+  resetPasswordRequest(
+    email: String!
+  ): Withdrawal!
+
+    resetPassword(
+    userId: Int!
+    newPassword: String!
+    resetToken: String!
+  ): Withdrawal!
+
+  getDepositQRCode: QrCodeRes!
+  
+
+
+
+  
+  
+  
+  signupPayment(firstname: String!, lastname: String!, email: String!, mobile: String!, role: ROLES): AuthPayload
+  signupAnd2FAPayment: AuthRes
+  authPayment: AuthRes
+  verifyMobilePayment(msisdn: String!, pin: String!): AuthPayload
+  verifyNewUserPayment(msisdn: String!, pin: String!): AuthPayload
+
+  bookFlightPayment(
+    flightCode: String,
+    departureCity: String!
+    departureDate: String!
+    departureTime: String!
+    numOfAdults:   Int!
+    arrivalCity:   String!
+    arrivalDate: String!
+    arrivalTime: String!
+    amount: String!
+    class:         CLASS!
+
+  ): Bookedpayload
+
+
+
+
+  # makePaymentPayment( amountDeposited: Int) : PaymentRes
+
+}
+
+  type AuthRes {
+    status: Boolean
+    message: String
+  }
+
+type Subscription {
+  checkinCreated: Message!
+}
+
+type Message {
+  userId: Int
+  status: String
+  username: String
+  airlineName: String
+  flightCode: String
+  departureCity: String
+  departureDate: String
+  arrivalCity: String
+  arrivalDate: String
+  ticketId: String
+}
+
+type BalanceOf {
+  status: String,
+  data: BalanceOfResp
+}
+
+type BalanceOfResp {
+  status: String,
+  data: String
+}
+
+type PaymentRes {
+  status: String
+  message: String
+  data: PaymentObject
+}
+
+type QrCodeRes {
+  status: String
+  message: String
+  data: String
+}
+
+type PaymentObject {
+
+  authorization_url: String
+  access_code: String
+  reference: String
+
+}
+
+type Withdrawal {
+   status: String,
+   message: String,
+}
+
+type MintToken {
+   status: String,
+   message: String,
+}
+
+type BankAccount {
+   status: String,
+   message: String,
+}
+
+type AuthPayload {
+  token: String
+  user: User
+  smsTokenStatus: String
+  statusMessage: String
+  status: Int
+}
+
+type AuthCode {
+  OTP: Int!
+  user: User!
+}
+
+type AuthCodeMobile {
+  pinId: String
+  verified: String
+  msisdn: String
+  status: String
+  pin: String
+}
+
+type Usersbanklist {
+  acctResCountry:Country     
+  acctName:      String
+  acctBank:      String    
+  acctNumber:     String       
+  acctType:       AccountType     
+  acctSwiftCode:  String   
+
+}
+
+type Transactions {
+  id:       Int
+  createdAt: String
+  trxType: String
+  description: String
+  amount: Int
+  status: String
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstname: String!
+  lastname: String!
+  mobile: String!
+  password: String!
+  emailVerified: Boolean
+  mobileVerified: Boolean
+  enabled2FA: Boolean
+  role: ROLES
+  status: Userstatus
+  walletBalance: String
+  numOfFlights: Int
+  totalFee:       Int
+  numOfRefunds: Int
+  totalRefunds: Int
+  totalDeposits: Int
+  totalWithdraws: Int
+  addr: String
+  pvtKey: String
+}
+
+type Airlines {
+  email:          String 
+  airlineName:    String 
+  password:       String
+  mobile:         String 
+
+}
+
+type Flight {
+  airlineId:   Int
+  airlineName: String
+  airlineAddres: String
+  flightCode: String
+  departureCity: String
+  departureDate: String
+  departureTime: String
+  departureInfo: String
+  arrivalCity: String
+  arrivalDate: String
+  arrivalTime: String
+  arrivalInfo: String
+  airfare: String
+  pass: Int
+  flightComplete: Boolean
+  totalFee: Int
+  class: CLASS
+  apstatus: String
+  status: String
+  flightEscrow: String
+  createdAt: String
+  updatedAt: String
+}
+
+type Booked {
+  airlineId:     String
+  airlineName:   String  
+  airlineAddres: String 
+  userFirstName: String
+  userLastName:  String
+  numOfAdults:   Int
+  numOfChildren: Int
+  numOfInfants:  Int
+  flightCode:    String
+  departureCity: String   
+  departureDate: String
+  departureTime: String
+  departureInfo: String
+  arrivalCity:   String
+  arrivalDate:   String
+  arrivalTime:   String
+  arrivalInfo:   String
+  amount:        String
+  pass:          Int
+  totalFee:      Int
+  checkedIn:     Boolean
+  cancelled:     Boolean
+  class:         CLASS
+  apstatus:      String  
+  status:        String   
+  ticketId:    String
+  flightEscrow:  String
+  createdAt:     String 
+  updatedAt:     String 
+}
+
+type Flightpayload {
+  flight: Flight!
+}
+
+type Bookedpayload {
+  bookUpdate: Booked!
+}
+
+
+enum ROLES {
+  PASSENGER
+  ADMIN
+}
+
+enum Userstatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+
+enum CLASS {
+  ECONOMY
+  BUSINESS
+  FIRST_CLASS
+  PREMIUM_ECONOMY
+}
+
+enum AccountType {
+  SAVINGS_ACCOUNT
+  CURRENT_ACCOUNT
+}
+
+enum Country {
+  NIGERIA
+  GHANA
+  USA
+  BRAZIL
+}
+
+
+
+
